@@ -1,0 +1,5 @@
+---
+- hosts: gitinsky
+  become: True
+  roles:
+    - gitinsky-nginx-project
