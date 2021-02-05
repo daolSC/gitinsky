@@ -8,6 +8,11 @@ Requirements
 
 Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
 
+Для выполнения роли подключение к серверу должно осуществляться под уч. записью "root".
+Роль написана для дистрибутива CentOS 7. Возможно, поэтому перезагрузка sysctl выполняется с ошибками, потому что в proc нет необходимых файлов, 
+которые могут иметься в Ubuntu. (Задача изначально была поставлена для Ubuntu. Поскольку у меня не было шаблона вирт машины с Ubuntu,
+я выполнил для CentOS 7).
+
 Role Variables
 --------------
 

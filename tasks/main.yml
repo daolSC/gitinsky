@@ -2,9 +2,8 @@
 # tasks file for gitinsky-nginx-project
 
 - name: Installing nginx, zsh, wget, git.
-  become: true
   yum:
-    name: 
+    name:
       - nginx
       - zsh
       - wget
@@ -29,7 +28,6 @@
     line: '        root         /usr/share/nginx/html/under;'
 
 - name: Starting and enabling nginx web server.
-  become: true
   service:
     name: nginx
     state: started
