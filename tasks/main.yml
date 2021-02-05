@@ -1,0 +1,47 @@
+---
+# tasks file for gitinsky-nginx-project
+
+- name: Installing nginx, zsh, wget, git.
+  yum:
+    name:
+      - nginx
+      - zsh
+      - wget
+      - git
+    state: present
+
+- name: Directory creation.
+  file:
+    path: /usr/share/nginx/html/under
+    state: directory
+
+- name: Cloning from git.
+  git:
+    repo: 'https://github.com/daolSC/web.git'
+    dest: '/usr/share/nginx/html/under'
+    version: master
+
+- name: Replacing the string in the nginx config.
+  lineinfile:
+    path: /etc/nginx/nginx.conf
+    regexp: '^        root         /usr/share/nginx/html;'
+    line: '        root         /usr/share/nginx/html/under;'
+
+- name: Starting and enabling nginx web server.
+  service:
+    name: nginx
+    state: started
+    enabled: true
+
+- name: Adding parameter to systemctl.conf
+  lineinfile:
+    dest: /etc/sysctl.conf
+    line: fs.files-max = 1204000
+
+- name: Adding parameter to systemctl.conf №2
+  lineinfile:
+    dest: /etc/sysctl.conf
+    line: somaxconn = 65535
+
+- name: Reloading sysctl
+  shell: sysctl -p
