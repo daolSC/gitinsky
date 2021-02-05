@@ -1,7 +1,7 @@
 ---
 # tasks file for gitinsky-nginx-project
 
-- name: Installing nginx, zsh, wget, git.
+- name: Installing nginx, zsh, wget, git
   yum:
     name:
       - nginx
@@ -10,7 +10,7 @@
       - git
     state: present
 
-- name: Directory creation.
+- name: Directory creation
   file:
     path: /usr/share/nginx/html/under
     state: directory
@@ -21,13 +21,13 @@
     dest: '/usr/share/nginx/html/under'
     version: master
 
-- name: Replacing the string in the nginx config.
+- name: Replacing the string in the nginx config
   lineinfile:
     path: /etc/nginx/nginx.conf
     regexp: '^        root         /usr/share/nginx/html;'
     line: '        root         /usr/share/nginx/html/under;'
 
-- name: Starting and enabling nginx web server.
+- name: Starting and enabling nginx web server
   service:
     name: nginx
     state: started
